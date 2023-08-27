@@ -1,0 +1,21 @@
+#! /bin/bash
+
+# This script will back up the whole OS
+echo "Choose your destination path of storing your backup file! Maybe a portable disk (/dev/sdb) or a folder"
+fdisk -l
+read $DES
+echo "10s to start backup"
+sleep 7s
+echo "3..."
+sleep 1s
+echo "2..."
+sleep 1s
+echo "and 1..."
+sleep 1s
+echo "          ==================="
+echo "          Start backup now!!!"
+echo "          ==================="
+sudo rsync -aAXH --info=progress2 --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found",\
+"/home/*/.thumbnails/*","/home/*/.cache/mozilla/*","/home/*/.cache/chromium/*","/home/*/.local/share/Trash/*",\
+"/home/*/.gvfs","/var/lib/dhcpcd/*","/home/*/.cache/google-chrome/*"} / $DES
+echo "Backup done!!!"
